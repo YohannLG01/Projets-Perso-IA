@@ -1,0 +1,88 @@
+# ===== Initialisation et premier commit =====
+
+# Initialiser un dépôt Git dans le dossier actuel
+git init
+
+# Ajouter tous les fichiers au suivi Git (staging area)
+git add .
+
+# Créer un commit avec un message
+git commit -m "Premier commit : Initialisation du projet IA"
+
+# ===== Lier le dépôt local à GitHub =====
+
+# Ajouter l'URL du dépôt distant (origin)
+git remote add origin https://github.com/YohannLG01/PROJET-IA-2025.git
+
+# Renommer la branche principale locale en 'main'
+git branch -M main
+
+# Pousser la branche main sur GitHub et définir origin/main comme branche par défaut pour push/pull
+git push -u origin main
+
+# ===== Gérer les identifiants =====
+
+# (Optionnel) Configurer Git pour mémoriser le token temporairement
+git config --global credential.helper cache
+
+# Sur Windows, pour utiliser le gestionnaire d'identifiants Windows
+git config --global credential.helper wincred
+
+# Sur Mac, pour utiliser le trousseau macOS
+git config --global credential.helper osxkeychain
+
+
+# ===== Gérer les branches =====
+
+# Créer et basculer sur une nouvelle branche (ex: dev)
+git checkout -b dev
+
+# Voir la liste des branches locales, la branche active est marquée par *
+git branch
+
+# Pousser la nouvelle branche dev sur GitHub et définir la branche distante par défaut
+git push -u origin dev
+
+# ===== Fusionner (merge) une branche dans une autre =====
+
+# Se placer sur la branche main
+git checkout main
+
+# Mettre à jour la branche main avec la dernière version du dépôt distant (optionnel mais recommandé)
+git pull origin main
+
+# Fusionner la branche dev dans main
+git merge dev
+
+# Pousser la branche main mise à jour sur GitHub
+git push origin main
+
+# ===== Supprimer une branche =====
+
+# Se placer sur une autre branche avant suppression (exemple : main)
+git checkout main
+
+# Supprimer une branche localement (seulement si fusionnée)
+git branch -d dev
+
+# Forcer la suppression locale (même si non fusionnée)
+git branch -D dev
+
+# Supprimer une branche sur GitHub
+git push origin --delete dev
+
+# Supprimer localement et sur GitHub en une seule ligne
+git branch -D dev && git push origin --delete dev
+
+# ===== Annuler un merge =====
+
+# Si merge local récent non poussé : revenir à l'état avant merge (attention aux modifications non commit)
+git reset --hard HEAD
+
+# Si merge avec conflits en cours : abandonner le merge
+git merge --abort
+
+# Si merge déjà poussé, annuler avec revert (remplacer <commit_hash> par le hash du commit de merge)
+git revert -m 1 <commit_hash>
+git push origin main
+
